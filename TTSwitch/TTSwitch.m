@@ -12,6 +12,14 @@
 
 static const CGFloat kTTSwitchAnimationDuration = 0.25;
 
+static inline CGRect TTCGRectApplyEdgeInsets(CGRect rect, UIEdgeInsets insets) {
+    rect.origin.x += insets.left;
+    rect.origin.y += insets.top;
+    rect.size.width -= insets.left + insets.right;
+    rect.size.height -= insets.top + insets.bottom;
+    return rect;
+}
+
 @interface TTSwitch ()
 
 @property (nonatomic, strong) UIImageView *trackImageView;
@@ -99,20 +107,41 @@ static const CGFloat kTTSwitchAnimationDuration = 0.25;
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-
+    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated" 
+    UIEdgeInsets legacyInsets = self.labelsEdgeInsets;
+#pragma clang diagnostic pop
+    BOOL legacyLayout = !UIEdgeInsetsEqualToEdgeInsets(legacyInsets, UIEdgeInsetsZero);
+    CGSize size = self.frame.size;
+    CGFloat availableWidth = size.width - (self.thumbImageView.frame.size.width + (2 * self.thumbInsetX));
     if (self.onString.length > 0) {
         [self.onLabel sizeToFit];
-        self.onLabel.frame = CGRectIntegral((CGRect){
-            { self.labelsEdgeInsets.left, self.labelsEdgeInsets.top },
-            { self.onLabel.bounds.size.width, self.trackImage.size.height - self.labelsEdgeInsets.top - self.labelsEdgeInsets.bottom }
-        });
+        
+        if (legacyLayout) {            
+            self.onLabel.frame = CGRectIntegral((CGRect){
+                { legacyInsets.left, legacyInsets.top },
+                { self.onLabel.bounds.size.width, self.trackImage.size.height - legacyInsets.top - legacyInsets.bottom }
+            });
+        } else {
+            CGRect centerRect = CGRectMake(0, 0, availableWidth, size.height);
+            self.onLabel.center = CGPointMake(CGRectGetMidX(centerRect), CGRectGetMidY(centerRect));
+            self.onLabel.frame = CGRectIntegral(TTCGRectApplyEdgeInsets(self.onLabel.frame, self.onLabelEdgeInsets));
+        }
     }
     if (self.offString.length > 0) {
         [self.offLabel sizeToFit];
-        self.offLabel.frame = CGRectIntegral((CGRect){
-            { self.trackImage.size.width - self.labelsEdgeInsets.right - self.offLabel.bounds.size.width, self.labelsEdgeInsets.top },
-            { self.offLabel.bounds.size.width, self.trackImage.size.height - self.labelsEdgeInsets.top - self.labelsEdgeInsets.bottom }
-        });
+        
+        if (legacyLayout) {
+            self.offLabel.frame = CGRectIntegral((CGRect){
+                { self.trackImage.size.width - legacyInsets.right - self.offLabel.bounds.size.width, legacyInsets.top },
+                { self.offLabel.bounds.size.width, self.trackImage.size.height - legacyInsets.top - legacyInsets.bottom }
+            });
+        } else {
+            CGRect centerRect = CGRectMake(self.offLabel.superview.frame.size.width - availableWidth, 0, availableWidth, size.height);
+            self.offLabel.center = CGPointMake(CGRectGetMidX(centerRect), CGRectGetMidY(centerRect));
+            self.offLabel.frame = CGRectIntegral(TTCGRectApplyEdgeInsets(self.offLabel.frame, self.offLabelEdgeInsets));
+        }
     }
 }
 

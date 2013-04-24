@@ -55,18 +55,49 @@
     squareThumbSwitch.thumbOffsetY = -3.0f; // Set this to -3 to compensate for shadow
 
     // Use on/off labels if you need to localize you switch
+    TTSwitch *squareLabelSwitch = [[TTSwitch alloc] initWithFrame:(CGRect){ CGPointZero, { 76.0f, 28.0f } }];
+    squareLabelSwitch.trackImage = [UIImage imageNamed:@"square-switch-track-no-text"];
+    squareLabelSwitch.overlayImage = [UIImage imageNamed:@"square-switch-overlay"];
+    squareLabelSwitch.thumbImage = [UIImage imageNamed:@"square-switch-thumb"];
+    squareLabelSwitch.thumbHighlightImage = [UIImage imageNamed:@"square-switch-thumb-highlight"];
+    squareLabelSwitch.trackMaskImage = [UIImage imageNamed:@"square-switch-mask"];
+    squareLabelSwitch.thumbInsetX = -3.0f;
+    squareLabelSwitch.thumbOffsetY = -3.0f; // Set this to -3 to compensate for shadow
+    squareLabelSwitch.onString = NSLocalizedString(@"ON", nil);
+    squareLabelSwitch.offString = NSLocalizedString(@"OFF", nil);
+    squareLabelSwitch.onLabel.textColor = [UIColor greenColor];
+    squareLabelSwitch.offLabel.textColor = [UIColor redColor];
+    // override UIAppearance settings
+    squareLabelSwitch.thumbMaskImage = nil;
+    squareLabelSwitch.onLabelEdgeInsets = UIEdgeInsetsZero;
+    squareLabelSwitch.offLabelEdgeInsets = UIEdgeInsetsZero;
+    
+
     TTSwitch *roundLabelSwitch = [[TTSwitch alloc] initWithFrame:(CGRect){ CGPointZero, { 76.0f, 28.0f } }];
     roundLabelSwitch.trackImage = [UIImage imageNamed:@"round-switch-track-no-text"];
-    roundLabelSwitch.labelsEdgeInsets = (UIEdgeInsets){ 3.0f, 10.0f, 3.0f, 10.0f };
     roundLabelSwitch.onString = NSLocalizedString(@"ON", nil);
     roundLabelSwitch.offString = NSLocalizedString(@"OFF", nil);
     roundLabelSwitch.onLabel.textColor = [UIColor greenColor];
     roundLabelSwitch.offLabel.textColor = [UIColor redColor];
     
+    
+    TTSwitch *legacyRoundLabelSwitch = [[TTSwitch alloc] initWithFrame:(CGRect){ CGPointZero, { 76.0f, 28.0f } }];
+    legacyRoundLabelSwitch.trackImage = [UIImage imageNamed:@"round-switch-track-no-text"];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated"    
+    legacyRoundLabelSwitch.labelsEdgeInsets = (UIEdgeInsets){ 3.0f, 10.0f, 3.0f, 10.0f };
+#pragma clang diagnostic pop    
+    legacyRoundLabelSwitch.onString = NSLocalizedString(@"ON", nil);
+    legacyRoundLabelSwitch.offString = NSLocalizedString(@"OFF", nil);
+    legacyRoundLabelSwitch.onLabel.textColor = [UIColor greenColor];
+    legacyRoundLabelSwitch.offLabel.textColor = [UIColor redColor];
+    
     self.items = @[
         [TTControlItem itemWithTitle:@"Round" control:defaultSwitch],
         [TTControlItem itemWithTitle:@"Square" control:squareThumbSwitch],
-        [TTControlItem itemWithTitle:@"Labels" control:roundLabelSwitch],
+        [TTControlItem itemWithTitle:@"Labels (square)" control:squareLabelSwitch],
+        [TTControlItem itemWithTitle:@"Labels (round)" control:roundLabelSwitch],
+        [TTControlItem itemWithTitle:@"Labels (legacy)" control:legacyRoundLabelSwitch],
     ];
 }
 

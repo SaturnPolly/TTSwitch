@@ -33,6 +33,8 @@
     [[TTSwitch appearance] setThumbMaskImage:[UIImage imageNamed:@"round-switch-mask"]];
     [[TTSwitch appearance] setThumbInsetX:-3.0f];
     [[TTSwitch appearance] setThumbOffsetY:-3.0f];
+    [[TTSwitch appearance] setOnLabelEdgeInsets:UIEdgeInsetsMake(0.0f, 3.0f, 0.0f, -3.0f)];
+    [[TTSwitch appearance] setOffLabelEdgeInsets:UIEdgeInsetsMake(0.0f, -3.0f, 0.0f, 3.0f)];
     
     // Window setup and presentation
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

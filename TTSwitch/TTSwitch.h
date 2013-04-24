@@ -72,10 +72,20 @@ typedef void(^TTSwitchChangeHandler)(BOOL on);
 @property (nonatomic, strong, readonly) UILabel *offLabel;
 
 /**
- Adjust positioning of labels. It uses the right and left edge insets for the horizontal postitioning of label. The top and bottom edge insets will
- be used to determine the height of the labels. Setting this will cause the labels to be added to the switch.
+ The label is centered in the available rect (view bounds minus thumb bounds), and the onLabelEdgeInsets are applied afterwards.
+ For backwards compatibility reasons TTSwitch falls back to old behaviour if labelsEdgeInsets is not equal to UIEdgeInsetsZero.
+ 
+ @see labelsEdgeInsets
  */
-@property (nonatomic, assign) UIEdgeInsets labelsEdgeInsets;
+@property (nonatomic, assign) UIEdgeInsets onLabelEdgeInsets UI_APPEARANCE_SELECTOR;
+
+/**
+ The label is centered in the available rect (view bounds minus thumb bounds), and the offLabelEdgeInsets are applied afterwards.
+ For backwards compatibility reasons TTSwitch falls back to old behaviour if labelsEdgeInsets is not equal to UIEdgeInsetsZero.
+ 
+ @see labelsEdgeInsets
+ */
+@property (nonatomic, assign) UIEdgeInsets offLabelEdgeInsets UI_APPEARANCE_SELECTOR;
 
 /**
  When the switch value is changed this block will be called.
@@ -88,5 +98,18 @@ typedef void(^TTSwitchChangeHandler)(BOOL on);
  @param animated When changing the state of the switch should the switch animate to its new state
  */
 - (void)setOn:(BOOL)on animated:(BOOL)animated;
+
+#pragma mark - deprecated
+
+/**
+ Deprecated
+ 
+ Adjust positioning of labels. It uses the right and left edge insets for the horizontal postitioning of label. The top and bottom edge insets will
+ be used to determine the height of the labels.
+ 
+ @see onLabelEdgeInsets
+ @see offLabelEdgeInsets
+ */
+@property (nonatomic, assign) UIEdgeInsets labelsEdgeInsets __attribute__((deprecated("Use onLabelEdgeInsets / offLabelEdgeInsets")));
 
 @end
