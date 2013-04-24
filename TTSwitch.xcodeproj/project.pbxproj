@@ -47,6 +47,10 @@
 		D2F70A5E16ED9AD5009221B5 /* round-switch-track-no-text@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D2F70A5C16ED9AD5009221B5 /* round-switch-track-no-text@2x.png */; };
 		DA4F76B21727EFB0004E322F /* square-switch-track-no-text.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F76B01727EFB0004E322F /* square-switch-track-no-text.png */; };
 		DA4F76B31727EFB0004E322F /* square-switch-track-no-text@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F76B11727EFB0004E322F /* square-switch-track-no-text@2x.png */; };
+		DA4F76B8172801A5004E322F /* off-image.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F76B4172801A5004E322F /* off-image.png */; };
+		DA4F76B9172801A5004E322F /* off-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F76B5172801A5004E322F /* off-image@2x.png */; };
+		DA4F76BA172801A5004E322F /* on-image.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F76B6172801A5004E322F /* on-image.png */; };
+		DA4F76BB172801A5004E322F /* on-image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F76B7172801A5004E322F /* on-image@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +103,10 @@
 		D2F70A5C16ED9AD5009221B5 /* round-switch-track-no-text@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "round-switch-track-no-text@2x.png"; path = "TTSwitch-Example/Images/Round/round-switch-track-no-text@2x.png"; sourceTree = SOURCE_ROOT; };
 		DA4F76B01727EFB0004E322F /* square-switch-track-no-text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "square-switch-track-no-text.png"; path = "Images/Square/square-switch-track-no-text.png"; sourceTree = "<group>"; };
 		DA4F76B11727EFB0004E322F /* square-switch-track-no-text@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "square-switch-track-no-text@2x.png"; path = "Images/Square/square-switch-track-no-text@2x.png"; sourceTree = "<group>"; };
+		DA4F76B4172801A5004E322F /* off-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "off-image.png"; path = "Images/off-image.png"; sourceTree = "<group>"; };
+		DA4F76B5172801A5004E322F /* off-image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "off-image@2x.png"; path = "Images/off-image@2x.png"; sourceTree = "<group>"; };
+		DA4F76B6172801A5004E322F /* on-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "on-image.png"; path = "Images/on-image.png"; sourceTree = "<group>"; };
+		DA4F76B7172801A5004E322F /* on-image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "on-image@2x.png"; path = "Images/on-image@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +199,10 @@
 		D2000F96166D0BAD00903E17 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				DA4F76B4172801A5004E322F /* off-image.png */,
+				DA4F76B5172801A5004E322F /* off-image@2x.png */,
+				DA4F76B6172801A5004E322F /* on-image.png */,
+				DA4F76B7172801A5004E322F /* on-image@2x.png */,
 				D2ACA228167BAF3E00BC1D03 /* Square */,
 				D2ACA213167B821200BC1D03 /* Round */,
 			);
@@ -317,6 +329,10 @@
 				D2F70A5E16ED9AD5009221B5 /* round-switch-track-no-text@2x.png in Resources */,
 				DA4F76B21727EFB0004E322F /* square-switch-track-no-text.png in Resources */,
 				DA4F76B31727EFB0004E322F /* square-switch-track-no-text@2x.png in Resources */,
+				DA4F76B8172801A5004E322F /* off-image.png in Resources */,
+				DA4F76B9172801A5004E322F /* off-image@2x.png in Resources */,
+				DA4F76BA172801A5004E322F /* on-image.png in Resources */,
+				DA4F76BB172801A5004E322F /* on-image@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

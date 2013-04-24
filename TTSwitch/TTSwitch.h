@@ -50,6 +50,38 @@ typedef void(^TTSwitchChangeHandler)(BOOL on);
 @property (nonatomic, assign, getter=isOn) BOOL on;
 
 /**
+ Image for the onImageView.
+ */
+@property (nonatomic, strong) UIImage * onImage;
+
+/**
+ Image for the offImageView.
+ */
+@property (nonatomic, strong) UIImage * offImage;
+
+/**
+ Use this property to style the onImageView. It will only be added to the switch if you have set the
+ image through the onImage property.
+ */
+@property (nonatomic, strong, readonly) UIImageView * onImageView;
+
+/**
+ Use this property to style the offImageView. It will only be added to the switch if you have set the
+ image through the offImage property.
+ */
+@property (nonatomic, strong, readonly) UIImageView * offImageView;
+
+/**
+ The onImageView is centered in the available rect (view bounds minus thumb bounds), and the onImageViewEdgeInsets are applied afterwards.
+ */
+@property (nonatomic, assign) UIEdgeInsets onImageViewEdgeInsets UI_APPEARANCE_SELECTOR;
+
+/**
+ The offImageView is centered in the available rect (view bounds minus thumb bounds), and the offImageViewEdgeInsets are applied afterwards.
+ */
+@property (nonatomic, assign) UIEdgeInsets offImageViewEdgeInsets UI_APPEARANCE_SELECTOR;
+
+/**
  String for the on label.
 */
 @property (nonatomic, copy) NSString *onString;

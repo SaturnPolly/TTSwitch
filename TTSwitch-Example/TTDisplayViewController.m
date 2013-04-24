@@ -53,6 +53,19 @@
     squareThumbSwitch.thumbMaskImage = nil; // Set this to nil to override the UIAppearance setting
     squareThumbSwitch.thumbInsetX = -3.0f;
     squareThumbSwitch.thumbOffsetY = -3.0f; // Set this to -3 to compensate for shadow
+    
+    TTSwitch *squareImageSwitch = [[TTSwitch alloc] initWithFrame:(CGRect){ CGPointZero, { 76.0f, 27.0f } }];
+    squareImageSwitch.trackImage = [UIImage imageNamed:@"square-switch-track-no-text"];
+    squareImageSwitch.overlayImage = [UIImage imageNamed:@"square-switch-overlay"];
+    squareImageSwitch.thumbImage = [UIImage imageNamed:@"square-switch-thumb"];
+    squareImageSwitch.thumbHighlightImage = [UIImage imageNamed:@"square-switch-thumb-highlight"];
+    squareImageSwitch.trackMaskImage = [UIImage imageNamed:@"square-switch-mask"];
+    squareImageSwitch.thumbMaskImage = nil; // Set this to nil to override the UIAppearance setting
+    squareImageSwitch.thumbInsetX = -3.0f;
+    squareImageSwitch.thumbOffsetY = -3.0f; // Set this to -3 to compensate for shadow
+    squareImageSwitch.onImage = [UIImage imageNamed:@"on-image"];
+    squareImageSwitch.offImage = [UIImage imageNamed:@"off-image"];
+    
 
     // Use on/off labels if you need to localize you switch
     TTSwitch *squareLabelSwitch = [[TTSwitch alloc] initWithFrame:(CGRect){ CGPointZero, { 76.0f, 28.0f } }];
@@ -95,6 +108,7 @@
     self.items = @[
         [TTControlItem itemWithTitle:@"Round" control:defaultSwitch],
         [TTControlItem itemWithTitle:@"Square" control:squareThumbSwitch],
+        [TTControlItem itemWithTitle:@"Square (images)" control:squareImageSwitch],
         [TTControlItem itemWithTitle:@"Labels (square)" control:squareLabelSwitch],
         [TTControlItem itemWithTitle:@"Labels (round)" control:roundLabelSwitch],
         [TTControlItem itemWithTitle:@"Labels (legacy)" control:legacyRoundLabelSwitch],

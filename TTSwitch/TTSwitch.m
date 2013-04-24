@@ -36,6 +36,9 @@ static inline CGRect TTCGRectApplyEdgeInsets(CGRect rect, UIEdgeInsets insets) {
 @property (nonatomic, strong, readwrite) UILabel *onLabel;
 @property (nonatomic, strong, readwrite) UILabel *offLabel;
 
+@property (nonatomic, strong, readwrite) UIImageView *onImageView;
+@property (nonatomic, strong, readwrite) UIImageView *offImageView;
+
 /**
  A Boolean value that determines the off/on state of the switch.
  @param on the off/on state
@@ -108,13 +111,28 @@ static inline CGRect TTCGRectApplyEdgeInsets(CGRect rect, UIEdgeInsets insets) {
 {
     [super layoutSubviews];
     
+    CGSize size = self.frame.size;
+    CGFloat availableWidth = size.width - (self.thumbImageView.frame.size.width + (2 * self.thumbInsetX));
+    
+    if (self.onImage) {
+        CGSize imageSize = self.onImage.size;
+        self.onImageView.frame = (CGRect){ { (availableWidth - imageSize.width) / 2.0f, (size.height - imageSize.height) / 2.0f }, imageSize };
+        self.onImageView.frame = CGRectIntegral(TTCGRectApplyEdgeInsets(self.onImageView.frame, self.onImageViewEdgeInsets));
+    }
+    
+    if (self.offImage) {
+        CGSize imageSize = self.offImage.size;
+        CGFloat originX = self.trackImageView.frame.size.width - availableWidth;
+        self.offImageView.frame = (CGRect){ { originX + (availableWidth - imageSize.width) / 2.0f, (size.height - imageSize.height) / 2.0f }, imageSize };
+        self.offImageView.frame = CGRectIntegral(TTCGRectApplyEdgeInsets(self.offImageView.frame, self.offImageViewEdgeInsets));
+    }    
+    
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated" 
     UIEdgeInsets legacyInsets = self.labelsEdgeInsets;
 #pragma clang diagnostic pop
     BOOL legacyLayout = !UIEdgeInsetsEqualToEdgeInsets(legacyInsets, UIEdgeInsetsZero);
-    CGSize size = self.frame.size;
-    CGFloat availableWidth = size.width - (self.thumbImageView.frame.size.width + (2 * self.thumbInsetX));
+    
     if (self.onString.length > 0) {
         [self.onLabel sizeToFit];
         
@@ -225,6 +243,37 @@ static inline CGRect TTCGRectApplyEdgeInsets(CGRect rect, UIEdgeInsets insets) {
     _maskInLockPosition = maskInLockPosition;
     [self standardMask];
     [self updateThumbPositionAnimated:NO];
+}
+
+- (void)setOnImage:(UIImage *)onImage
+{
+    _onImage = onImage;
+    self.onImageView.image = _onImage;
+    [self.onImageView sizeToFit];
+    [self.trackImageView addSubview:self.onImageView];
+}
+
+- (void)setOffImage:(UIImage *)offImage
+{
+    _offImage = offImage;
+    self.offImageView.image = _offImage;
+    [self.trackImageView addSubview:self.offImageView];
+}
+
+- (UIImageView *)onImageView 
+{
+    if (!_onImageView) {
+        _onImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    }
+    return _onImageView;
+}
+
+- (UIImageView *)offImageView 
+{
+    if (!_offImageView) {
+        _offImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    }
+    return _offImageView;
 }
 
 - (void)setOnString:(NSString *)onString
